@@ -17,4 +17,11 @@ const printHelp = () => {
     -t [API_KEY] для сохранения токена`);
 };
 
-export { printError, printSuccess, printHelp };
+const printWeather = (res, icon) => {
+  console.log(dedent`${chalk.bgYellowBright("WEATHER")}
+    Погода в городе ${res.name}
+    ${icon}${res.weather[0].description}
+    Температура: ${res.main.temp}`);
+};
+
+export { printError, printSuccess, printHelp, printWeather };

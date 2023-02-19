@@ -18,6 +18,8 @@ const saveKeyValue = async (key, value) => {
   await promises.writeFile(filePath, JSON.stringify(data));
 };
 
+
+
 const getKeyValue = async (key) => {
   if (await isExist(filePath)) {
     const file = await promises.readFile(filePath);
@@ -35,4 +37,24 @@ const isExist = async (path) => {
     return false;
   }
 };
-export { saveKeyValue, getKeyValue, isExist, TOKEN };
+
+const saveCityValue = async(city,value) =>{
+  let data = {};
+  if (await isExist(filePath)) {
+    const file = await promises.readFile(filePath);
+    data = JSON.parse(file);
+  }
+  data[city] = value;
+  await promises.writeFile(filePath, JSON.stringify(data));
+}
+const getCityValue = async (city) => {
+  if (await isExist(filePath)) {
+    const file = await promises.readFile(filePath);
+    const data = JSON.parse(file);
+    return data[city];
+  }
+  return null;
+};
+
+
+export { saveKeyValue, getKeyValue, isExist, saveCityValue, getCityValue,  TOKEN };
